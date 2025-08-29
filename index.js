@@ -5,12 +5,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ---------- REPLACE THESE WITH YOUR DETAILS ----------
+// ---------- YOUR DETAILS ----------
 const FULL_NAME = "s_subhashini"; // e.g. "s_subhashini"
 const DOB_DDMMYYYY = "02122004"; // e.g. "01012000"
 const EMAIL = "subhashini.s2022@vitstudent.ac.in";
 const ROLL = "22BPS1070";
-// ----------------------------------------------------
+// ----------------------------------
 
 const isIntegerString = (s) => /^-?\d+$/.test(s);
 const isAlphaString = (s) => /^[A-Za-z]+$/.test(s);
@@ -22,6 +22,16 @@ function buildConcatString(allAlphaChars) {
     .map((ch, i) => (i % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
     .join("");
 }
+
+// -------- NEW FRIENDLY GET HANDLER --------
+app.get("/bfhl", (req, res) => {
+  res
+    .status(200)
+    .send(
+      "✅ This endpoint only accepts POST requests with JSON body at /bfhl."
+    );
+});
+// ------------------------------------------
 
 app.post("/bfhl", (req, res) => {
   try {
