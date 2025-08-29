@@ -17,7 +17,7 @@ It also computes the sum of numbers and generates a special concatenated string 
 ### 1. POST `/bfhl`
 Accepts a JSON array of strings and returns a structured response.
 
-#### Request Body Sample
+Request Body Sample
 ```json
 {
   "data": ["a", "1", "334", "4", "R", "$"]
