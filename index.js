@@ -4,26 +4,20 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// ---------- YOUR DETAILS ----------
-const FULL_NAME = "s_subhashini"; // e.g. "s_subhashini"
-const DOB_DDMMYYYY = "02122004"; // e.g. "01012000"
+const FULL_NAME = "s_subhashini"; 
+const DOB_DDMMYYYY = "02122004"; 
 const EMAIL = "subhashini.s2022@vitstudent.ac.in";
 const ROLL = "22BPS1070";
-// ----------------------------------
-
 const isIntegerString = (s) => /^-?\d+$/.test(s);
 const isAlphaString = (s) => /^[A-Za-z]+$/.test(s);
 
 function buildConcatString(allAlphaChars) {
-  // reverse and apply alternating caps starting with Upper
   const rev = allAlphaChars.slice().reverse();
   return rev
     .map((ch, i) => (i % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
     .join("");
 }
 
-// -------- NEW FRIENDLY GET HANDLER --------
 app.get("/bfhl", (req, res) => {
   res
     .status(200)
@@ -31,13 +25,11 @@ app.get("/bfhl", (req, res) => {
       "✅ This endpoint only accepts POST requests with JSON body at /bfhl."
     );
 });
-// ------------------------------------------
 
 app.post("/bfhl", (req, res) => {
   try {
     const data = Array.isArray(req.body?.data) ? req.body.data : null;
     if (!data) {
-      // If payload missing or wrong, send a valid JSON with is_success:false
       return res.status(200).json({
         is_success: false,
         user_id: `${FULL_NAME}_${DOB_DDMMYYYY}`,
@@ -63,24 +55,20 @@ app.post("/bfhl", (req, res) => {
       const token = String(tokenRaw);
 
       if (isIntegerString(token)) {
-        // pure numeric token
         const n = parseInt(token, 10);
         sum += n;
         if (Math.abs(n) % 2 === 0) even_numbers.push(token);
         else odd_numbers.push(token);
       } else if (isAlphaString(token)) {
-        // pure alphabet token
         alphabets.push(token.toUpperCase());
         for (const ch of token) allAlphaChars.push(ch);
       } else {
-        // mixed token (letters+digits+specials) — handle characters individually
         for (const ch of token) {
           if (/[^A-Za-z0-9]/.test(ch)) {
             special_characters.push(ch);
           } else if (/[A-Za-z]/.test(ch)) {
             allAlphaChars.push(ch);
           } else {
-            // digits inside mixed token: ignored for sum/odd/even (spec uses only pure-number tokens)
           }
         }
       }
