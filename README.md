@@ -1,41 +1,45 @@
-# BFHL API (VIT Full Stack Assignment as Part of Bajaj Finserv Health Test - Built within 1 hour)
+# BFHL API (VIT Full Stack Assignment — Bajaj Finserv Health Test)
 
-This is a simple REST API built with **Node.js + Express** as part of the VIT Full Stack assignment as Part of Bajaj Finserv Health Test.
-
-The API classifies input data into odd/even numbers, alphabets, and special characters.  
-It also computes the sum of numbers and generates a special concatenated string as per the problem statement.
+This is a small REST API built with **Node.js + Express** for the VIT Full Stack assignment (Bajaj Finserv Health Test).  
+It accepts an array of string tokens and classifies them into odd/even numbers, alphabets, and special characters; computes the numeric sum; and builds a custom concatenated string as required.
 
 ---
 
 ## 🚀 Live Demo
-👉 [BFHL API on Render](https://vit-bfhl-api-h24f.onrender.com/bfhl)
+**Endpoint (POST):**  
+`https://vit-bfhl-api-h24f.onrender.com/bfhl`
+
+A friendly message is available for browser checks (GET `/bfhl`) explaining that the endpoint expects POST with JSON.
 
 ---
 
 ## 📌 Endpoints
 
-### 1. POST `/bfhl`
-Accepts a JSON array of strings and returns a structured response.
+### POST `/bfhl`  
+Accepts a JSON body containing an array of strings (tokens). Returns a JSON response containing:
+- `is_success` (boolean)
+- `user_id`, `email`, `roll_number`
+- `odd_numbers`, `even_numbers` (arrays of strings)
+- `alphabets` (uppercase tokens)
+- `special_characters`
+- `sum` (string)
+- `concat_string`
 
-Request Body Sample
-```json
-{
-  "data": ["a", "1", "334", "4", "R", "$"]
-}
-### 2. GET `/bfhl`
-For browser testing only.  
-Returns a friendly message: ✅ This endpoint only accepts POST requests with JSON body at /bfhl.
+> All responses use HTTP status **200**; the `is_success` field indicates logical success/failure.
+
+### GET `/bfhl`  
+For browser testing only. Returns a short message informing users to POST JSON to `/bfhl`.
 
 ---
 
 ## 🛠️ Features
-- Identifies **odd** and **even** numbers.
-- Converts pure alphabets to **UPPERCASE**.
-- Extracts **special characters**.
-- Ignores digits inside mixed tokens for classification (per problem spec).
-- Computes the **sum** of numeric tokens.
-- Generates a **concat_string** (reverse all letters, apply alternating caps).
-- Deployed on **Render** with CI/CD from GitHub.
+- Classifies **pure numeric** tokens into odd / even (keeps tokens as strings).  
+- Converts **pure alphabet** tokens to uppercase and lists them under `alphabets`.  
+- Extracts **special characters** (non-alphanumeric).  
+- Ignores digits that appear inside mixed tokens for numeric classification (per spec).  
+- Computes the **sum** of pure numeric tokens and returns it as a string.  
+- Builds `concat_string` by collecting all letters (in token order), reversing them, and applying alternating capitalization starting with Upper.  
+- Deployed to **Render** with source on GitHub.
 
 ---
 
@@ -44,26 +48,30 @@ Returns a friendly message: ✅ This endpoint only accepts POST requests with JS
 - Express.js
 - CORS
 - Render (deployment)
+- GitHub (source)
 
 ---
 
-## ▶️ Running Locally
+## ▶️ Run Locally
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/ssubhashini2004/vit-bfhl-api.git
-   cd vit-bfhl-api
+1. Clone the repository:
+```bash
+git clone https://github.com/ssubhashini2004/vit-bfhl-api.git
+cd vit-bfhl-api
+
 2. Install dependencies:
-   ```bash
-   npm install
+```bash
+npm install
+
 3. Start the server:
-   ```bash
-   npm start
+```bash
+npm start
+
 4. Test with curl:
-   ```bash
-   curl -X POST http://localhost:3000/bfhl \
-  -H "Content-Type: application/json" \
-  -d "{\"data\":[\"a\",\"1\",\"334\",\"4\",\"R\",\"$\"]}"
+```bash
+curl -X POST http://localhost:3000/bfhl \
+-H "Content-Type: application/json" \
+-d "{\"data\":[\"a\",\"1\",\"334\",\"4\",\"R\",\"$\"]}"
 
 ## 👩‍💻 Author
 
