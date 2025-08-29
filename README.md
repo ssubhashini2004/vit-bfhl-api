@@ -54,29 +54,10 @@ For browser testing only. Returns a short message informing users to POST JSON t
 
 ## ▶️ Run Locally
 
-1. Clone the repository:
+Clone the repository:
 ```bash
 git clone https://github.com/ssubhashini2004/vit-bfhl-api.git
 cd vit-bfhl-api
 
-2. Install dependencies:
-```bash
-npm install
 
-3. Start the server:
-```bash
-npm start
 
-4. Test with curl:
-```bash
-curl -X POST http://localhost:3000/bfhl \
--H "Content-Type: application/json" \
--d "{\"data\":[\"a\",\"1\",\"334\",\"4\",\"R\",\"$\"]}"
-
-## 👩‍💻 Author
-
-Name: S Subhashini
-
-Roll Number: 22BPS1070
-
-Email: subhashini.s2022@vitstudent.ac.in
